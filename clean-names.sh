@@ -48,6 +48,29 @@ case "$ACTION" in
       && yes n | mv -i "$file" "${dest//[^[:alnum:]._\/-]/}"
     done
     ;;
+  "showdir")
+    for dir in ./*; do
+      # replace ' - ' with '-'
+      # replace ' ' with '_'
+      # remove everything but alphanumeric and '._/-'
+      # auto answer no to overwriting existing files
+      dest="${dir//[[:space:]]-[[:space:]]/-}" \
+      && dest="${dest//[[:space:]]/_}" \
+      && echo "$file" "${dest//[^[:alnum:]._\/-]/}"
+      # && yes n | mv -i "$file" "${dest//[^[:alnum:]._\/-]/}"
+    done
+    ;;
+  "rundir")
+    for dir in ./*; do
+      # replace ' - ' with '-'
+      # replace ' ' with '_'
+      # remove everything but alphanumeric and '._/-'
+      # auto answer no to overwriting existing files
+      dest="${dir//[[:space:]]-[[:space:]]/-}" \
+      && dest="${dest//[[:space:]]/_}" \
+      && mv -i "$dir" "${dest//[^[:alnum:]._\/-]/}"
+    done
+    ;;
   *)
     echo -e ${USAGE}
     ;;

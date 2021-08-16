@@ -1,3 +1,6 @@
+# Should update to create newfiles in new directories
+# not overwrite by default
+
 # COLORS
 DEFAULT='\e[39m'
 BLUE='\e[34m'
@@ -56,8 +59,7 @@ case "$ACTION" in
       # auto answer no to overwriting existing files
       dest="${dir//[[:space:]]-[[:space:]]/-}" \
       && dest="${dest//[[:space:]]/_}" \
-      && echo "$file" "${dest//[^[:alnum:]._\/-]/}"
-      # && yes n | mv -i "$file" "${dest//[^[:alnum:]._\/-]/}"
+      && echo "$dir" "${dest//[^[:alnum:]._\/-]/}"
     done
     ;;
   "rundir")
@@ -68,7 +70,7 @@ case "$ACTION" in
       # auto answer no to overwriting existing files
       dest="${dir//[[:space:]]-[[:space:]]/-}" \
       && dest="${dest//[[:space:]]/_}" \
-      && mv -i "$dir" "${dest//[^[:alnum:]._\/-]/}"
+      && yes n | mv -i "$dir" "${dest//[^[:alnum:]._\/-]/}"
     done
     ;;
   *)
